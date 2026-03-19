@@ -242,7 +242,7 @@ body {
   border: none;
   border-radius: 6px;
   color: var(--midnight);
-  cursor: none;
+  cursor: pointer;
   font-weight: 700;
   transition: all 0.3s ease;
   position: relative;
@@ -317,7 +317,7 @@ body {
 #music-btn {
   background: none;
   border: none;
-  cursor: none;
+  cursor: pointer;
   font-size: 1.2rem;
   color: var(--gold);
   transition: all 0.3s ease;
@@ -524,7 +524,7 @@ body {
 
 .envelope-wrap {
   perspective: 1200px;
-  cursor: none;
+  cursor: pointer;
 }
 
 .envelope {
@@ -642,7 +642,7 @@ body {
   border: 1px solid var(--gold-dark);
   border-radius: 4px;
   color: var(--gold);
-  cursor: none;
+  cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -790,7 +790,7 @@ body {
   margin: 0 auto 0.5rem;
   filter: drop-shadow(0 0 20px rgba(201,168,76,0.4));
   animation: hat-wobble 2.5s ease-in-out infinite;
-  cursor: none;
+  cursor: pointer;
   user-select: none;
   transition: filter 0.4s ease, transform 0.4s ease;
 }
@@ -889,7 +889,7 @@ body {
   border: 1px solid rgba(201,168,76,0.15);
   border-radius: 8px;
   color: var(--parchment-dark);
-  cursor: none;
+  cursor: pointer;
   transition: all 0.25s ease;
   display: flex;
   align-items: center;
@@ -1050,7 +1050,7 @@ body {
   border: 1px solid rgba(201,168,76,0.3);
   border-radius: 4px;
   color: rgba(201,168,76,0.6);
-  cursor: none;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 .btn-reset-sorting:hover { border-color: var(--gold); color: var(--gold); }
@@ -1073,7 +1073,7 @@ body {
   border: 1px solid var(--emerald);
   border-radius: 4px;
   color: #6dba8a;
-  cursor: none;
+  cursor: pointer;
   transition: all 0.3s ease;
 }
 .map-btn-reveal:hover {
@@ -1232,7 +1232,7 @@ body {
   border: 1px solid rgba(201,168,76,0.15);
   border-radius: 8px;
   padding: 1.5rem;
-  cursor: none;
+  cursor: pointer;
   transition: all 0.3s ease;
   position: relative;
   overflow: hidden;
@@ -1276,14 +1276,47 @@ body {
   color: var(--parchment);
   max-height: 0;
   overflow: hidden;
-  transition: max-height 0.6s cubic-bezier(0.34, 1.56, 0.64, 1),
-              opacity 0.5s ease;
-  opacity: 0;
+  transition: max-height 0.05s ease;
+  opacity: 1;
 }
 
 .secret-message.revealed {
-  max-height: 200px;
-  opacity: 1;
+  max-height: 300px;
+}
+
+/* Cada letra se convierte en un span con animación de tinta */
+.secret-message .ink-char {
+  display: inline;
+  opacity: 0;
+  color: var(--parchment);
+  text-shadow: none;
+  animation: none;
+  transition: none;
+}
+
+.secret-message.revealed .ink-char {
+  animation: ink-drop 0.04s ease forwards;
+}
+
+@keyframes ink-drop {
+  0%   {
+    opacity: 0;
+    color: var(--gold-light);
+    text-shadow: 0 0 12px var(--gold), 0 0 25px rgba(201,168,76,0.8);
+    filter: blur(4px);
+  }
+  40%  {
+    opacity: 1;
+    color: #fff;
+    text-shadow: 0 0 8px var(--gold-light), 0 0 16px rgba(255,255,255,0.5);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    color: var(--parchment);
+    text-shadow: none;
+    filter: blur(0);
+  }
 }
 
 .secret-divider {
@@ -1291,9 +1324,8 @@ body {
   height: 1px;
   background: linear-gradient(to right, var(--gold-dark), transparent);
   margin: 0.8rem 0;
-  transition: width 0.5s ease 0.1s;
+  transition: width 0.6s ease 0.2s;
 }
-.secret-message.revealed + .secret-divider,
 .secret-card.active .secret-divider { width: 100%; }
 
 .btn-reveal-secret {
@@ -1305,8 +1337,13 @@ body {
   border-radius: 30px;
   padding: 0.4rem 1rem;
   color: rgba(201,168,76,0.6);
-  cursor: none;
+  cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
+  pointer-events: all;
+  display: inline-block;
+  margin-top: 0.5rem;
 }
 .btn-reveal-secret:hover, .secret-card.active .btn-reveal-secret {
   border-color: var(--gold);
@@ -1497,7 +1534,7 @@ footer {
 
       <p class="letter-salutation">
         Querida/o
-        <span contenteditable="true" spellcheck="false">Ana Karen Hdz</span>:
+        <span contenteditable="true" spellcheck="false">Ana Karen</span>:
       </p>
 
       <p class="letter-body" contenteditable="true" spellcheck="false">Desde el primer momento en que apareció tu nombre en el Libro de los Destinos Mágicos, supe que eras alguien extraordinaria/o.
@@ -1514,12 +1551,12 @@ Eres mi encantamiento favorito, el que siempre saldrá de mi varita.</p>
 
       <p class="letter-signature">
         Con todo mi amor mágico,<br>
-        <span contenteditable="true" spellcheck="false">Tu Admirador Secreto</span>
+        <span contenteditable="true" spellcheck="false">Cesar Leon</span>
       </p>
 
       <p class="letter-postdata">
         P.D.:
-        <span contenteditable="true" spellcheck="false">Si lees esto me debes unos tacos XD ✨</span>
+        <span contenteditable="true" spellcheck="false">Si lees esto me debes unos tacos...... ✨</span>
       </p>
     </div>
   </section>
@@ -1600,21 +1637,21 @@ Eres mi encantamiento favorito, el que siempre saldrá de mi varita.</p>
             <div class="timeline-dot"></div>
             <div class="timeline-date">PRIMER CAPÍTULO</div>
             <div class="timeline-event">✨ El Primer Encuentro</div>
-            <div class="timeline-desc">Edita esta fecha y este texto con tu historia real...</div>
+            <div class="timeline-desc">Aunque nuestro primer encuentro no fue el mejor, desde entonces te me hiciste muy guapa.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-date">LA PRIMERA SONRISA</div>
             <div class="timeline-event">🌟 Cuando Todo Cambió</div>
-            <div class="timeline-desc">Ese instante mágico que lo transformó todo para siempre.</div>
+            <div class="timeline-desc">Aunque todos diran que lo que todo lo cambio fue la primer vez que lo hicimos, para mi fue el como me cantaste.</div>
           </div>
 
           <div class="timeline-item">
             <div class="timeline-dot"></div>
             <div class="timeline-date">EL HECHIZO MÁS PODEROSO</div>
             <div class="timeline-event">💫 Nuestro Primer "Te Quiero"</div>
-            <div class="timeline-desc">Las palabras que cambiaron el curso de nuestra historia.</div>
+            <div class="timeline-desc">Aunque paso mucho para poder decirtelo, mi primer te quiero eran esas risas y miradas de oveja a medio morir.</div>
           </div>
 
           <div class="timeline-item">
@@ -2195,33 +2232,92 @@ function revealMap() {
 }
 
 /* ============================================================
-   MENSAJES OCULTOS
+   MENSAJES OCULTOS — EFECTO TINTA
    ============================================================ */
 const secretStates = {};
+// Guardamos el texto original antes de fragmentarlo
+const secretTexts  = {};
+
+function initSecretTexts() {
+  for (let id = 1; id <= 6; id++) {
+    const el = document.getElementById('sm' + id);
+    if (el) secretTexts[id] = el.innerText.trim();
+  }
+}
 
 function revealSecret(id) {
-  const msg = document.getElementById('sm' + id);
+  const msg  = document.getElementById('sm' + id);
   const card = document.getElementById('sc' + id);
   const btn  = card.querySelector('.btn-reveal-secret');
 
   if (secretStates[id]) {
-    // Ocultar
+    // — OCULTAR —
+    // Borrar spans y restaurar texto plano invisible
+    msg.innerHTML = secretTexts[id];
     msg.classList.remove('revealed');
     card.classList.remove('active');
     btn.textContent = 'Revelar ✨';
     secretStates[id] = false;
   } else {
-    // Revelar
-    msg.classList.add('revealed');
+    // — REVELAR con efecto tinta —
+    secretStates[id] = true;
     card.classList.add('active');
     btn.textContent = 'Ocultar 🌑';
-    secretStates[id] = true;
+
+    // Abrir el contenedor primero
+    msg.classList.add('revealed');
+
+    // Fragmentar el texto en spans por carácter
+    const text = secretTexts[id];
+    msg.innerHTML = '';
+
+    // Calcular delay base por velocidad de escritura
+    const baseDelay   = 18;  // ms entre letras
+    const glowFade    = 80;  // duración del brillo en ms
+    let   charIndex   = 0;
+
+    for (let i = 0; i < text.length; i++) {
+      const ch = text[i];
+
+      if (ch === '\n') {
+        msg.appendChild(document.createElement('br'));
+        continue;
+      }
+
+      const span = document.createElement('span');
+      span.classList.add('ink-char');
+      span.textContent = ch;
+
+      // Delay escalonado — letras de espacio van más rápido
+      const delay = charIndex * baseDelay;
+      span.style.animationDelay    = delay + 'ms';
+      span.style.animationDuration = '320ms';
+
+      msg.appendChild(span);
+      charIndex++;
+    }
+
+    // Chispas al iniciar
     createSparks(
       card.getBoundingClientRect().left + card.offsetWidth / 2,
-      card.getBoundingClientRect().top  + 40
+      card.getBoundingClientRect().top  + 30
     );
+
+    // Segunda ráfaga de chispas a mitad del texto
+    const midDelay = Math.floor(charIndex / 2) * baseDelay;
+    setTimeout(() => {
+      createSparks(
+        card.getBoundingClientRect().left + card.offsetWidth / 2,
+        card.getBoundingClientRect().top  + card.offsetHeight / 2
+      );
+    }, midDelay);
   }
 }
+
+// Inicializar textos al arrancar
+document.addEventListener('DOMContentLoaded', initSecretTexts);
+// También si el contenido ya cargó
+if (document.readyState !== 'loading') initSecretTexts();
 
 /* ============================================================
    MÚSICA
